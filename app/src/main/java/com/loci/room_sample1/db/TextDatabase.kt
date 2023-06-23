@@ -1,16 +1,22 @@
 package com.loci.room_sample1.db
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.loci.room_sample1.db.dao.TextDao
+import com.loci.room_sample1.db.dao.TextDao2
 import com.loci.room_sample1.db.entity.TextEntity
+import com.loci.room_sample1.db.entity.TextEntity2
 
-@Database(entities = [TextEntity::class], version = 1)
+@Database(entities = [TextEntity::class, TextEntity2::class], version = 2)
 abstract class TextDatabase : RoomDatabase() {
 
     abstract fun textDao(): TextDao
+    abstract fun textDao2(): TextDao2
 
     companion object {
         @Volatile
@@ -23,12 +29,24 @@ abstract class TextDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext, TextDatabase::class.java, "text_database"
                 )
-                    .fallbackToDestructiveMigration()
+//                    .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_1_2)
                     .build()
                 INSTANCE = instance
                 instance
             }
         }
+
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+
+                Log.d("migrate", "MIGRATION_1_2")
+
+                database.execSQL("CREATE TABLE `text_table2` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text2` TEXT NOT NULL)")
+            }
+        }
+
+
     }
 
 
