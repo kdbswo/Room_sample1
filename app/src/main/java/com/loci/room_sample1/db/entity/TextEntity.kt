@@ -6,11 +6,13 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "text_table")
-data class TextEntity (
+data class TextEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "text")
-    val text: String
+    val text: String,
+    @ColumnInfo(name = "text2", defaultValue = "text2 default")
+    val text2: String
 )
