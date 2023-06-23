@@ -11,5 +11,7 @@ data class TextEntity2(
     @ColumnInfo(name = "id")
     val id: Int,
     @ColumnInfo(name = "text2")
-    val text2: String
+    val text2: String,
+    @ColumnInfo(name = "newText")
+    val text3: String
 )

@@ -12,7 +12,7 @@ import com.loci.room_sample1.db.dao.TextDao2
 import com.loci.room_sample1.db.entity.TextEntity
 import com.loci.room_sample1.db.entity.TextEntity2
 
-@Database(entities = [TextEntity::class, TextEntity2::class], version = 2)
+@Database(entities = [TextEntity::class, TextEntity2::class], version = 3)
 abstract class TextDatabase : RoomDatabase() {
 
     abstract fun textDao(): TextDao
@@ -31,6 +31,7 @@ abstract class TextDatabase : RoomDatabase() {
                 )
 //                    .fallbackToDestructiveMigration()
                     .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_2_3)
                     .build()
                 INSTANCE = instance
                 instance
@@ -46,8 +47,18 @@ abstract class TextDatabase : RoomDatabase() {
             }
         }
 
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                Log.d("migrate", "MIGRATION_2_3")
 
+                database.execSQL("ALTER TABLE `text_table2` ADD COLUMN `newText` TEXT NOT NULL DEFAULT `newnew`")
+
+            }
+
+        }
     }
 
 
 }
+
+
