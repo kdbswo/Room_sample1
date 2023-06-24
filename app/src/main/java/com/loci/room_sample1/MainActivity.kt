@@ -10,6 +10,7 @@ import com.loci.room_sample1.db.entity.TextEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         insertBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.textDao().insert(TextEntity(0, inputArea.text.toString()))
+                db.textDao().insert(TextEntity(0, inputArea.text.toString(), Calendar.getInstance().time))
                 inputArea.setText("")
             }
         }
