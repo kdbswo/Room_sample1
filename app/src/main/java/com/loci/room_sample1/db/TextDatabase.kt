@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.loci.room_sample1.db.dao.TextDao
+import com.loci.room_sample1.db.entity.MyConverters
 import com.loci.room_sample1.db.entity.TextEntity
 
 @Database(entities = [TextEntity::class], version = 1)
+@TypeConverters(MyConverters::class)
 abstract class TextDatabase : RoomDatabase() {
 
     abstract fun textDao(): TextDao

@@ -41,6 +41,31 @@
             android:text="delete"
             android:layout_margin="5dp"/>
 
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/photo"/>
+
+        <Button
+            android:id="@+id/setImage"
+            android:text="setImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <Button
+            android:id="@+id/getImage"
+            android:text="getImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
